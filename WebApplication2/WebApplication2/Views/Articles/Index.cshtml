@@ -1,0 +1,65 @@
+﻿@model WebApplication2.Controllers.ViewModel
+@{
+    ViewBag.Title = "Article";
+}
+
+@{const int num_of_articles = 6;}
+@if(Session["lang"] != null && ((string)Session["lang"] == "he"))
+{
+    <u><h3 style="color:white;" class="text-center">המאמרים</h3></u>
+}
+else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
+{
+    <u><h3 style="color:white;" class="text-center">المقالات</h3></u>
+}
+else
+{
+    <u><h3 style="color:white;" class="text-center">The articles</h3></u>
+}
+@for(int i = Model.current_page * num_of_articles - num_of_articles;(i < Model.current_page * num_of_articles && i < Model.articles.Count());i++)
+{
+    WebApplication2.Models.Article item = Model.articles.ToArray()[i];
+
+    <div style="position:absolute; margin-left:@(16 + 18 * (i % 3))%;padding-top:@(-5 + 21*((i % 6)/3))%;">
+        <a href=@("/Article/id=" +  (item.Id.ToString())) style="display:block;z-index:10;position:relative;">
+
+            <div style="width:14%;height:15%;position:fixed">
+                <img src="../@(Model.articles.ToArray()[i].articleImage)" style="width: 100%; height: 100%; top: 50px; background: #D9D9D9;z-index:1;position:absolute" />
+            </div>
+            <div style="width:14%;height:19%;position:fixed">
+                <img src="../@(Model.articles.ToArray()[i].articleImage)" style="position: relative; width: 100%; height: 100%; background: #D9D9D9; border-radius: 15px; z-index: 20; bottom: -19%; " />
+                </div>
+
+                <h5 style="color: mediumpurple; text-align: center; padding-top: 74%; position: absolute; margin-top: 1%; left: 28%; ">@Html.DisplayFor(modelItem => item.articleSubject)</h5>
+
+                @if((string)Session["lang"] == "en")
+                {
+                    <h4 style="width: 208px; position: relative; padding-top: 85%;">
+                        @Html.DisplayFor(modelItem => item.title_english)
+                    </h4>
+                }
+                @if((string)Session["lang"] == "he")
+                {
+                    <h4 style="width: 208px; position: relative; padding-top: 85%;">
+                        @Html.DisplayFor(modelItem => item.title_hebrew)
+                    </h4>
+
+                }
+                @if((string)Session["lang"] == "ar")
+                {
+                    <h4 style="width: 208px; position: relative; padding-top: 85%;">
+                        @Html.DisplayFor(modelItem => item.title_arabic)
+                    </h4>
+                }
+
+
+        </a>
+    </div>
+}
+@for(int i = 0;i < (Model.articles.Count() + num_of_articles - 1) / num_of_articles;i++)
+{
+    <div style="position:absolute; bottom:0%; left:@(30+ i*3)%">
+        <button type="button" value=@((i+1).ToString()) onclick="location.href='@Url.Action("page", "Articles", new {id =i + 1})'">@((i + 1).ToString())</button>
+    </div>
+}
+

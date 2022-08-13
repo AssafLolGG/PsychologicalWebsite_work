@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if(Session["is_admin"] != null)
+{
+    <h2 style="color:white">Admin? : @(((bool)Session["is_admin"]).ToString()) </h2>
+}
+else
+{
+    <h2 style="color:white;">Admin? : false </h2>
+}

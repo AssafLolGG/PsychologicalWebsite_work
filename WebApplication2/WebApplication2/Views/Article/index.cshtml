@@ -1,0 +1,296 @@
+﻿@model WebApplication2.Controllers.ViewModelOneArticle
+@{
+    ViewBag.Title = "index";
+}
+<head>
+
+</head>
+<body>
+    <script type="text/javascript">
+        function onPfpChange() {
+            $.ajax({
+                url: '/Article/updatePfp',
+                type: 'GET',
+                data:
+                {
+                    selectValue: document.getElementById("photoChoice").value
+                },
+                success: function (data) {
+                    document.getElementById("pfpimg").src = data;
+                    
+                },
+                error: function (data, error, e2) {
+                    alert("hi");
+                }
+            });
+            
+        }
+
+    </script>
+    <style>
+        .placeHolderWhite {
+        }
+
+            .placeHolderWhite::placeholder {
+                color: white;
+            }
+    </style>
+    <div id="color_bg" style="background:
+#292929;">
+        @if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+        {
+            <a href="deleteArticle/@Model.article.Id">
+                <img src="../../Content/remove.png" style="position: absolute;
+width: 50px;
+height: 50px;
+right: 40px;
+top: 90px;" title="Remove Article" />
+            </a>
+        }
+        @if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+        {
+            <a href="edit/">
+                <img src="../../Content/edit_icon.png" style="position:absolute;
+    top: 94px;
+    left: 30px;
+    width: 60px;
+    height: 60px;" title="Edit Article" />
+            </a>
+            }
+        @if((string)Session["lang"] == "en")
+        {
+            <h3 class="text-center" style="color:white;"><u> @Html.DisplayFor(modelItem => Model.article.title_english) </u></h3>
+        }
+        @if((string)Session["lang"] == "he")
+        {
+            <h3 class="text-center" style="color:white;"><u> @Html.DisplayFor(modelItem => Model.article.title_hebrew) </u></h3>
+        }
+        @if((string)Session["lang"] == "ar")
+        {
+            <h3 class="text-center" style="color:white;"><u> @Html.DisplayFor(modelItem => Model.article.title_arabic) </u></h3>
+
+        }
+        <br />
+        <br />
+        <br />
+        <br />
+        <div style="background:#ffffff">
+            @if((string)Session["lang"] == "en" && Model.article.body_english != "")
+            {
+                @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_english)))
+            }
+            @if((string)Session["lang"] == "he" && Model.article.body_hebrew != "")
+            {
+                @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_hebrew)))
+            }
+            @if((string)Session["lang"] == "ar" && Model.article.body_arabic != "")
+            {
+                @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_arabic)))
+            }
+        </div>
+        <br />
+        <br />
+        <form method="post" action="comment">
+            <input name="commenter_name" type="text" style="
+background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:150px;outline:none;border:none;" placeholder="Your Name" />
+
+            <br />
+
+            <br />
+            <div style="
+width: 735px;
+height: 190px;
+left: 294px;
+
+background: #363636;
+border: 0px solid #FFFFFF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;">
+
+                <div style="box-sizing: border-box;
+position:relative;
+width: 681px;
+height: 90px;
+left: 26px;
+top: 19px;
+
+background: #363636;
+border: 0px solid #0F0202;">
+                    <textarea name="comment_text" style="max-width:1000px;width:inherit;height:inherit; resize:unset;font-size:20px;background: #363636;border: 0px solid #0F0202;color:white;outline:none;" placeholder="Your Comment content"></textarea>
+                </div>
+
+                <div style="position: relative;
+width: 161px;
+height: 52px;
+left: 546px;
+top: 10px;
+
+background: #7B17B8;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 12px;">
+
+                    <h2 style="font-family: 'ABeeZee';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 38px;
+/* identical to box height */
+text-align:center;
+position:relative;
+
+color: #FFFFFF;
+
+transform: rotate(-0.3deg);">
+                        <button type="submit" style="background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 161px;
+height: 52px;">
+                            Comment
+                        </button>
+                    </h2>
+                    <select name="photoChoice" id="photoChoice" style="top: -171px;
+    left: 248px;position:absolute;background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:150px;outline:none;border:none;height:33px;color:gray;" onchange="onPfpChange();">
+                        <option value="man1">Man-1</option>
+                        <option value="man2">Man-2</option>
+                        <option value="woman1">Woman-1</option>
+                        <option value="woman2">Woman-2</option>
+                    </select>
+                    <div style="    background: #232323;
+    width: 200px;
+    height: 200px;
+    top: -123px;
+    right: -267px;
+    position: absolute;
+    border-radius: 20px;">
+                        <img style=" width: 200px;
+    height: 200px;border-radius: 20px;" id="pfpimg" src="../Content/pfpImages/pfpman1.png" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+        <hr />
+        @foreach(WebApplication2.Models.Comment comment in Model.comments)
+        {
+
+    <div style="position: relative;
+width: 675px;
+height: @(((Session["is_admin"] != null && (bool)Session["is_admin"] == false &&!comment.if_replied) ||(Session["is_admin"] ==null &&!comment.if_replied)) ? "191" : "250")px;
+left: 0px;
+top: 20px;
+
+background: #E7E3E3;
+border-radius: 20px;">
+
+
+        <div style="position: relative;
+width: 675px;
+height: @(((Session["is_admin"] != null && (bool)Session["is_admin"] == false &&!comment.if_replied) ||(Session["is_admin"] ==null &&!comment.if_replied)) ? "191" : "250")px;
+left: 0px;
+top: 20px;
+
+background: #E7E3E3;
+border-radius: 20px;">
+            <div style="position: absolute;
+width: 331px;
+height: 48px;
+left: 92px;
+top: -9px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+">@comment.commenter_name</div>
+    <div style="position: absolute;
+width: 420px;
+height: 39px;
+left: 98px;
+top:22px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 39px;
+/* identical to box height */
+
+
+color: #9A67AC;">@WebApplication2.Controllers.ArticleController.UnixTimeStampToDateTime(comment.TimeStamp).ToString("dd/MM/yyyy hh:mm:ss")</div>
+    <div style="    position: absolute;
+    width: 475px;
+    height: 88px;
+    left: 97px;
+    top: 70px;">
+        <textarea style="max-width:475px;min-width:475px;min-height:88px;max-height:88px;background: pink;
+    border: none;
+    outline: none;resize:none;" disabled>@comment.comment_text</textarea>
+    </div>
+    @if(Session["is_admin"] != null && (bool)Session["is_admin"] == true && !comment.if_replied)
+    {
+        using(Html.BeginForm("reply","Article",FormMethod.Post))
+        {
+            <div style="position: absolute;
+    width: 479px;
+    height: 58px;
+    left: 97px;
+    top: 178px;
+    border-radius: 5px;
+    color: white;
+    ">
+
+                <textarea name="reply_of_owner" class="placeHolderWhite" style="max-height:58px;min-height:58px;max-width:479px;min-width:479px;background: linear-gradient(13deg, mediumpurple, #c979d9);
+    border: none;
+    outline: none;resize:none;color:white;" placeholder="Your reply..." ;></textarea>
+            </div>
+            <input hidden name="comment_id" value="@comment.comment_id" />
+            <button type="submit" style="width:60px; height:55px;top:180px;left:593px;position:relative;">Reply</button>
+        }
+    }
+    else if(comment.if_replied)
+    {
+        <div style="position: absolute;
+    width: 479px;
+    height: 58px;
+    left: 97px;
+    top: 175px;
+    border-radius: 5px;
+    color: white;
+    ">
+            <textarea name="reply_of_owner" class="placeHolderWhite" style="max-height:58px;min-height:58px;max-width:479px;min-width:479px;background: linear-gradient(13deg, mediumpurple, #c979d9);
+    border: none;border-radius:10px; text-align:center;
+    outline: none;resize:none;color:white;" disabled>@comment.reply</textarea>
+        </div>
+    }
+
+    <img src="@comment.PFP_PIC_ID" style="    position: absolute;
+        width: 88px;
+    height: 92px;
+    top: -17px;
+    left: 7px;
+    border-radius: 50%;
+    display: inline-block;
+    "></img>
+
+    </div>
+    @if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+    {
+        <a href="deleteComment/@(comment.comment_id)">
+            <img src="../Content/deleteIcon.png" style=" position: absolute; top: 18px; right: 22px; width: 4%;" title="Remove Comment" />
+        </a>
+    }
+    </div>
+    <br />
+    <br />
+}
+</body>
+

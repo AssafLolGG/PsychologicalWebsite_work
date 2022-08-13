@@ -1,0 +1,86 @@
+﻿@model WebApplication2.Controllers.ModelContact
+
+<style>
+    .placeHolderWhite {
+    }
+
+        .placeHolderWhite::placeholder {
+            color: white;
+        }
+</style>
+
+
+<div style="color:white;">
+    @if((string)Session["lang"] == "en")
+    {
+        <h2 style="text-align:center;position:relative;top:10px;"><u>Contact us!</u></h2>
+        <h3 style="text-align:center;">Do you have any questions, suggestions or feedback?<br /><div style="position:relative;top:10px">We'd love to hear from you!</div></h3>
+    }
+    @if((string)Session["lang"] == "he")
+    {
+        <h2 style="text-align:center;position:relative;top:10px;"><u>צרו קשר!</u></h2>
+        <h3 style="text-align:center;">יש לך שאלות, הצעות או משוב?<br /><div style="position:relative;top:10px">נשמח לשמוע ממך!</div></h3>
+    }
+    @if((string)Session["lang"] == "ar")
+    {
+        <h2 style="text-align:center;position:relative;top:10px;"><u>اتصل بنا!</u></h2>
+        <h3 style="text-align:center;">هل لديك أي أسئلة أو اقتراحات أو ملاحظات؟<br /><div style="position:relative;top:10px">نحب أن نسمع منك!</div></h3>
+    }
+    @using(Html.BeginForm("SendRequestContact","Home"))
+    {
+        
+        <div style="top: 28%; left: 23%; width: 50%; position: relative;">
+            @if((string)Session["lang"] == "en")
+            {
+                <input name="contacter_name" type="text" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; left: 27%; height: 40px; max-width: 100%; margin-top: 3%;" placeholder="Your Name" class="placeHolderWhite" />
+            }
+            @if((string)Session["lang"] == "he")
+            {
+                <input name="contacter_name" type="text" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; left: 27%; height: 40px; max-width: 100%; margin-top: 3%;" placeholder="השם שלך" class="placeHolderWhite" />
+            }
+            @if((string)Session["lang"] == "ar")
+            {
+                <input name="contacter_name" type="text" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; left: 27%; height: 40px; max-width: 100%; margin-top: 3%;" placeholder="اسمك" class="placeHolderWhite" />
+            }
+
+            @if((string)Session["lang"] == "en")
+            {
+                <input name="contacter_email" type="email" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; margin-top: 5%; left: 27%; height: 40px; max-width: 100%; "  placeholder="Your Email" class="placeHolderWhite" />
+            }
+            @if((string)Session["lang"] == "he")
+            {
+                <input name="contacter_email" type="email" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; margin-top: 5%; left: 27%; height: 40px; max-width: 100%; " placeholder="האימייל שלך" class="placeHolderWhite" />
+            }
+            @if((string)Session["lang"] == "ar")
+            {
+                <input name="contacter_email" type="email" style="background: #363636; border-radius: 10px; color: white; text-align: center; font-size: 20px; width: 60%; outline: none; border: none; position: relative; margin-top: 5%; left: 27%; height: 40px; max-width: 100%; " placeholder="بريدك الالكتروني" class="placeHolderWhite" />
+            }
+            <div style="position: relative; margin-top: 5%; left: 27%; width: 80%; height: 190px; background: #363636; border: 0px solid #FFFFFF; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 10px; ">
+                @if((string)Session["lang"] == "en")
+                {
+<textarea name="contact_body" style="max-width: 1000px; width: 96%; height: 171px; resize: unset; font-size: 20px; background: transparent; border: 0px solid #0F0202; color: white; outline: none; left: 12px; top: 10px; position: absolute " placeholder="Your Message" class="placeHolderWhite"></textarea>
+                }
+                @if((string)Session["lang"] == "he")
+                {
+                    <textarea name="contact_body" style="max-width: 1000px; width: 96%; height: 171px; resize: unset; font-size: 20px; background: transparent; border: 0px solid #0F0202; color: white; outline: none; left: 12px; top: 10px; position: absolute " placeholder="ההודעה שלך" class="placeHolderWhite"></textarea>
+
+                }
+                @if((string)Session["lang"] == "ar")
+                {
+                    <textarea name="contact_body" style="max-width: 1000px; width: 96%; height: 171px; resize: unset; font-size: 20px; background: transparent; border: 0px solid #0F0202; color: white; outline: none; left: 12px; top: 10px; position: absolute " placeholder="رسالتك" class="placeHolderWhite"></textarea>
+
+                }
+            </div>
+            <button type="submit" style=" width: 80%; border-radius: 30px; height: 67px; background: #901B9A; font-family: initial; font-size: 32px; text-align: center; left: 27%; position: relative; border: none; margin-top: 7%; ">
+                Send Comment
+            </button>
+
+        </div>
+    }
+    <div style="top: 40%; width: 37%; position: absolute; left: 2%;">
+        <img style="width: 100%; /* top:0px; */ left: 0px; position: absolute; z-index: 2;" src="~/Content/ContactUs.png" />
+    </div>
+    <div style="width: 22%; position: absolute; top: 51%; right: 3%;">
+        <img style="width: 100%; top: 0px; right: 10%; /* position: absolute; */ z-index: -1; top: 19%;" src="~/Content/feedback.jpg" />
+    </div>
+</div>

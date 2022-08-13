@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+    </style>
+    <script type="text/javascript">
+        function on_israel_hit() {
+            $.ajax({
+                url: '/Home/',
+                type: 'GET',
+                data:
+                {
+                   
+                },
+                success: function (data) {
+
+                },
+                error: function (data, error, e2) {
+                }
+            });
+
+        }
+
+    </script>
+</head>
+
+<body style="background:#292929">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav">
+                    @if(Session["lang"] != null && ((string)Session["lang"] == "he"))
+                    {
+                        <li>@Html.ActionLink("עמוד הבית","Index","Home")</li>
+                        <li>@Html.ActionLink("אודות","About","Home")</li>
+                        <li>@Html.ActionLink("צרו קשר","Contact","Home")</li>
+                        <li>@Html.ActionLink("מאמרים","index","Articles")</li>
+                        <li>@Html.ActionLink("מנהל","index","Admin")</li>
+                        if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+                        {
+                            <li>@Html.ActionLink("הוסף פוסט","add","Admin")</li>
+                        }
+                    }
+                    else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
+                    {
+                        <li>@Html.ActionLink("الصفحة الرئيسية","Index","Home")</li>
+                        <li>@Html.ActionLink("صفحة عني","About","Home")</li>
+                        <li>@Html.ActionLink("صفحة الاتصال","Contact","Home")</li>
+                        <li>@Html.ActionLink("صفحة المقالات","index","Articles")</li>
+                        <li>@Html.ActionLink("صفحة الإدارة","index","Admin")</li>
+                        if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+                        {
+                            <li>@Html.ActionLink("أضف منشورا","add","Admin")</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home","Index","Home")</li>
+                        <li>@Html.ActionLink("About","About","Home")</li>
+                        <li>@Html.ActionLink("Contact","Contact","Home")</li>
+                        <li>@Html.ActionLink("Articles","index","Articles")</li>
+                        <li>@Html.ActionLink("Admin","index","Admin")</li>
+                        if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
+                        {
+                            <li>@Html.ActionLink("Add post","add","Admin")</li>
+                        }
+                    }
+                    <li>
+                        @using(Html.BeginForm("hit_israel","home",FormMethod.Post))
+                        {
+                            <button type="submit">
+                                <img style="margin:10px;" src="~/Content/israel_flag.jpg" width="50" hight="20" />
+                            </button>
+                        }
+                    </li>
+                    <li>
+                        @using(Html.BeginForm("hit_english","home",FormMethod.Post))
+                        {
+                            <button type="submit">
+                                <img style="margin:10px;" src="~/Content/english_flag.jpg" width="54" hight="30" />
+                            </button>
+                        }
+                    </li>
+
+                    <li>
+                        @using(Html.BeginForm("hit_arabic","home",FormMethod.Post))
+                        {
+                            <button type="submit">
+                                <img style="margin:10px;" src="~/Content/arabic_flag.svg" width="54" hight="30" />
+                            </button>
+                        }
+                    </li>
+
+                </ul>
+                
+                
+            </div>
+        </div>
+    </div>
+    <div style="background:#292929">
+        <div class="container body-content" style="background:#292929">
+            @RenderBody()
+
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

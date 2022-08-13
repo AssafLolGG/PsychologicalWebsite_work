@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "edit";
+}
+
+<h2 style="color:white;text-align:center;"><u>Current Article Details</u></h2>
+<br />
+<br />
+
+@using(Html.BeginForm("edit_article",
+                        "Article",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+{
+    <div style="text-align: -webkit-center;color:white;">
+        <input name="article_title_english" type="text" placeholder="Article's title in english" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;" />
+        <br />
+        <br />
+        <input name="article_title_hebrew" type="text" placeholder="Article's title in hebrew" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;" />
+        <br />
+        <br />
+        <input name="article_title_arabic" type="text" placeholder="Article's title in arabic" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;" />
+        <br />
+        <br />
+        <input name="subject" type="text" placeholder="Article's subject" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;" />
+        <br />
+        <br />
+        <h2 style="display:inline;">Article's picture: </h2><input name="article_picture" type="file" placeholder="Article's picture" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;display:inline;" />
+        <br />
+        <br />
+        <h2 style="display:inline;">Article's body in english: </h2><input id="article_body_english" name="article_body_english" type="file" placeholder="Article's body in english" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;display:inline;" />
+        <br />
+        <br />
+        <h2 style="display:inline;">Article's body in hebrew: </h2><input id="article_body_hebrew" name="article_body_hebrew" type="file" placeholder="Article's body in hebrew" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;display:inline;" />
+        <br />
+        <br />
+        <h2 style="display:inline;">Article's body in arabic: </h2><input id="article_body_arabic" name="article_body_arabic" type="file" placeholder="Article's body in arabic" style="background: #363636;
+border-radius: 10px;color:white;text-align:center;font-size:20px;width:300px;outline:none;border:none;display:inline;" />
+
+        <button type="submit" style="height:100px;background: #363636;border-radius:10px;font-size:20px;top:100px;position:relative ">Apply Changes (any of the empty inputs will stay the same)</button>
+
+    </div>
+}
