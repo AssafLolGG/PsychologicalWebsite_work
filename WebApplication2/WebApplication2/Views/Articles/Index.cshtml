@@ -4,6 +4,7 @@
 }
 
 @{const int num_of_articles = 6;}
+<!--
 @if(Session["lang"] != null && ((string)Session["lang"] == "he"))
 {
     <u><h3 style="color:white;" class="text-center">המאמרים</h3></u>
@@ -56,10 +57,11 @@ else
         </a>
     </div>
 }
+
 @for(int i = 0;i < (Model.articles.Count() + num_of_articles - 1) / num_of_articles;i++)
 {
     <div style="position:absolute; bottom:0%; left:@(30+ i*3)%">
         <button type="button" value=@((i+1).ToString()) onclick="location.href='@Url.Action("page", "Articles", new {id =i + 1})'">@((i + 1).ToString())</button>
     </div>
 }
-
+    -->
