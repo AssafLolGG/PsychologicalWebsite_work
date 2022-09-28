@@ -12,6 +12,10 @@
         console.log("hi")
         return;
     }
+    function clicked_article(article_id) {
+        location.href = "../../Article/id=" + article_id;
+        return;
+    }
 </script>
 <style>
     html {
@@ -122,22 +126,26 @@ else
         }
         @for(int i = 0;i < 5;i++)
         {
+
             if(i < Model.articles.ToArray().Length)
             {
-                <div class="item" onmouseover="onhoverd('item1@(i)')" onmouseout="out('item1@(i)')">
-                    <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image">
-                    <br />
-                    <text id="item1@(i)" style="visibility:hidden;color:white; margin-left: 28%;">@Model.articles.ToArray()[i].title_english<br /><text style="color:white; margin-left: 28%;">@Model.articles.ToArray()[i].articleSubject</text></text>
-                </div>
-            }
-        }
+                
+                    <div class="item" onmouseover="onhoverd('item1@(i)')" onmouseout="out('item1@(i)')">
+
+                        <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
+
+                        <br />
+                        <text id="item1@(i)" style="visibility:hidden;color:white; margin-left: 28%;">@Model.articles.ToArray()[i].title_english<br /><text style="color:white; margin-left: 28%;">@Model.articles.ToArray()[i].articleSubject</text></text>
+                    </div>
+                    }
+                    }
 
 
-        @if(Model.articles.ToArray().Length > 5)
-        {
-            <a href="#section2" class="arrow__btn">›</a>
-        }
-    </section>
+                    @if(Model.articles.ToArray().Length > 5)
+                    {
+                        <a href="#section2" class="arrow__btn">›</a>
+                    }
+            </section>
     @if(Model.articles.ToArray().Length > 5)
     {
         <section id="section2">
@@ -147,7 +155,7 @@ else
         if(i < Model.articles.ToArray().Length)
         {
                     <div class="item" onmouseover="onhoverd('item2@(i)')" onmouseout="out('item2@(i)')">
-                        <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image">
+                        <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
                         <br />
                         <text id="item2@(i)" style="visibility:hidden;color:white; margin-left: 28%;">@Model.articles.ToArray()[i].title_english<br /><text style="color:white; margin-left: 28%;">@Model.articles.ToArray()[i].articleSubject</text></text>
                     </div>
