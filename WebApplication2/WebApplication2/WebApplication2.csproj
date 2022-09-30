@@ -171,7 +171,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DatabaseAPI.cs" />
     <Compile Include="Models\DBConnection.cs" />
     <Compile Include="Global.asax.cs">
@@ -232,6 +234,7 @@
     <Content Include="Views\Admin\add.cshtml" />
     <Content Include="Views\Article\comments.cshtml" />
     <Content Include="Views\Article\edit.cshtml" />
+    <Content Include="Views\Courses\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ArticlesFiles\" />
