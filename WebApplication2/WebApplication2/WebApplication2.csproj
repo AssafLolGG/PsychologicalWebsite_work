@@ -203,6 +203,16 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\english_flag.webp" />
+    <Content Include="fonts\Inter-Black.ttf" />
+    <Content Include="fonts\Inter-Bold.ttf" />
+    <Content Include="fonts\Inter-ExtraBold.ttf" />
+    <Content Include="fonts\Inter-ExtraLight.ttf" />
+    <Content Include="fonts\Inter-Light.ttf" />
+    <Content Include="fonts\Inter-Medium.ttf" />
+    <Content Include="fonts\Inter-Regular.ttf" />
+    <Content Include="fonts\Inter-SemiBold.ttf" />
+    <Content Include="fonts\Inter-Thin.ttf" />
+    <Content Include="fonts\Inter-VariableFont_slnt,wght.ttf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
