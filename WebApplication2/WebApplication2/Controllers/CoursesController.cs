@@ -11,14 +11,15 @@ namespace WebApplication2.Controllers
 {
     public class coursesModel
     {
-        public IEnumerable<Course> courses { get; set; }
+        public List<Course> courses { get; set; }
     }
     public class CoursesController:Controller
     {
         public coursesModel model;
         public ActionResult index()
         {
-            //model.courses = new List<Course> { new Course{course_title="a",course_text="a",course_cost= 3,path_of_logo="3"} ,new Course { course_title = "a",course_text = "a",course_cost = 3,path_of_logo = "3" } };
+            model = new coursesModel();
+            model.courses = DatabaseAPI.getAllCourses();
             return View(model);
         }
 
@@ -33,11 +34,11 @@ namespace WebApplication2.Controllers
             if(email_address != "" && course_id_num != -1)
             {
                 const string subject = "New Request!";
-                string body = "You choose to get information about the course{" + course_id_num.ToString() + "}";
+                string body = "You choose to get information about the course \"" + DatabaseAPI.getCourseByID(course_id_num).course_title + "\".\nhere's is its sylabus";
 
 
 
-
+                string ownerMail = "asafka73@gmail.com";
 
                 string username = "asafka73@gmail.com"; // high lvl sec 
                 string password = "boodnletuoiyhpsk";
@@ -57,7 +58,23 @@ namespace WebApplication2.Controllers
                 mail.Subject = subject;
                 mail.Body = body;
 
+                System.Net.Mail.Attachment attachment;
+                attachment = new System.Net.Mail.Attachment(Server.MapPath( DatabaseAPI.getCourseByID(course_id_num).course_file));
+                mail.Attachments.Add(attachment);
+
                 smtpClient.Send(mail);
+
+                mail = new MailMessage();
+                mail.From = new MailAddress(username);
+                mail.To.Add(ownerMail);
+                mail.Subject ="New interested in the course.";
+                mail.Body = "his email is: " + email_address + ".\nthe course he is interested in is: " + DatabaseAPI.getCourseByID(course_id_num).course_title + ".";
+
+                attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file));
+                mail.Attachments.Add(attachment);
+
+                smtpClient.Send(mail);
+
                 return RedirectToAction("index","Articles");
             }
             else

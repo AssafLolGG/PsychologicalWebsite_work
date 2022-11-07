@@ -18,6 +18,32 @@ namespace WebApplication2.Models
             }
             return false;
         }
+
+        public static List<Course> getAllCourses()
+        {
+            List<Course> courses = new List<Course>();
+            System.Data.DataSet courses_dataset = MvcApplication.DBconn.RunDataSetSQL("SELECT * FROM Courses");
+            for(int i = 0;i < courses_dataset.Tables[0].Rows.Count;i++)
+            {
+                Course a = new Course() { course_id = int.Parse(courses_dataset.Tables[0].Rows[i]["course_id"].ToString()), course_cost= courses_dataset.Tables[0].Rows[i]["course_price"].ToString(), path_of_logo = courses_dataset.Tables[0].Rows[i]["Course_logo_file"].ToString(), course_file = courses_dataset.Tables[0].Rows[i]["course_sylabus_file"].ToString(), course_title = courses_dataset.Tables[0].Rows[i]["course_name"].ToString() };
+                courses.Add(a);
+            }
+
+            return courses;
+        }
+
+        public static Course getCourseByID(int id)
+        {
+            List<Course> courses = getAllCourses();
+            for(int i = 0;i < courses.Count;i++)
+            {
+                if(courses[i].course_id == id)
+                {
+                    return courses[i];
+                }
+            }
+            return null;
+        }
         public static List<Article> getAllArticles()
         {
             List<Article> articles = new List<Article>();
