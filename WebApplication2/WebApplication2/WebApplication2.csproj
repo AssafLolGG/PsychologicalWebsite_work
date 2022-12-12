@@ -245,6 +245,7 @@
     <Content Include="Views\Article\comments.cshtml" />
     <Content Include="Views\Article\edit.cshtml" />
     <Content Include="Views\Courses\index.cshtml" />
+    <Content Include="Views\Admin\add_course.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ArticlesFiles\" />

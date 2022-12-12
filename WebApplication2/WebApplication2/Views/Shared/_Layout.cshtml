@@ -30,7 +30,7 @@
 </head>
 
 <body style="background:#292929">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height: 6%">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,29 +40,37 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse ">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="position: fixed;
+  top: 0;
+  width: 100%;
+
+  ">
                     @if(Session["lang"] != null && ((string)Session["lang"] == "he"))
                     {
                         <li>@Html.ActionLink("עמוד הבית","Index","Home")</li>
                         <li>@Html.ActionLink("אודות","About","Home")</li>
                         <li>@Html.ActionLink("צרו קשר","Contact","Home")</li>
                         <li>@Html.ActionLink("מאמרים","index","Articles")</li>
+                        <li>@Html.ActionLink("קורסים","index","Courses")</li>
                         <li>@Html.ActionLink("מנהל","index","Admin")</li>
                         if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
                         {
                             <li>@Html.ActionLink("הוסף פוסט","add","Admin")</li>
+                            <li>@Html.ActionLink("הוסף קורס","add_course","Admin")</li>
                         }
                     }
                     else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
                     {
-                        <li>@Html.ActionLink("الصفحة الرئيسية","Index","Home")</li>
-                        <li>@Html.ActionLink("صفحة عني","About","Home")</li>
-                        <li>@Html.ActionLink("صفحة الاتصال","Contact","Home")</li>
-                        <li>@Html.ActionLink("صفحة المقالات","index","Articles")</li>
-                        <li>@Html.ActionLink("صفحة الإدارة","index","Admin")</li>
+                        <li>@Html.ActionLink("Домашняя страница","Index","Home")</li>
+                        <li>@Html.ActionLink("О странице","About","Home")</li>
+                        <li>@Html.ActionLink("Контактная страница","Contact","Home")</li>
+                        <li>@Html.ActionLink("Контактная страница","index","Articles")</li>
+                        <li>@Html.ActionLink("Курсы","index","Courses")</li>
+                        <li>@Html.ActionLink("Администратор","index","Admin")</li>
                         if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
                         {
-                            <li>@Html.ActionLink("أضف منشورا","add","Admin")</li>
+                            <li>@Html.ActionLink("Добавить статью","add","Admin")</li>
+                            <li>@Html.ActionLink("Добавить курс","add_course","Admin")</li>
                         }
                     }
                     else
@@ -76,13 +84,16 @@
                         if(Session["is_admin"] != null && (bool)Session["is_admin"] == true)
                         {
                             <li>@Html.ActionLink("Add post","add","Admin")</li>
+                            <li>@Html.ActionLink("Add Course","add_course","Admin")</li>
                         }
                     }
                     <li>
                         @using(Html.BeginForm("hit_israel","home",FormMethod.Post))
                         {
                             <button type="submit">
-                                <img style="margin:10px;" src="~/Content/israel_flag.jpg" width="50" hight="20" />
+                                <div style="height:6%">
+                                    <img style="margin:10px;height:100%;" src="~/Content/israel_flag.jpg" width="50" />
+                                </div>
                             </button>
                         }
                     </li>
@@ -90,7 +101,9 @@
                         @using(Html.BeginForm("hit_english","home",FormMethod.Post))
                         {
                             <button type="submit">
-                                <img style="margin:10px;" src="~/Content/english_flag.jpg" width="54" hight="30" />
+                                <div style="height:6%">
+                                    <img style="margin:10px;height:100%;" src="~/Content/english_flag.jpg" width="54" />
+                                </div>
                             </button>
                         }
                     </li>
@@ -99,7 +112,9 @@
                         @using(Html.BeginForm("hit_arabic","home",FormMethod.Post))
                         {
                             <button type="submit">
-                                <img style="margin:10px;" src="~/Content/arabic_flag.svg" width="54" hight="30" />
+                                <div style="height:6%">
+                                    <img style="margin:10px;height:100%;" src="~/Content/arabic_flag.svg" width="54" />
+                                </div>
                             </button>
                         }
                     </li>

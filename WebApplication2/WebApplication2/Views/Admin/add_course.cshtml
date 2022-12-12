@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Add Course";
+}
+    <body>
+        @using(Html.BeginForm("addCourse",
+                        "Admin",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+        {
+            <h2 style="color:white">The course name in English: </h2><input type="text" name="course_name" />
+            <h2 style="color:white">The course name in Hebrew: </h2><input type="text" name="course_name_hebrew" />
+            <h2 style="color:white">The course name in Russian: </h2><input type="text" name="course_name_russian" />
+            <h2 style="color:white">Price of the Course: </h2><input type="text" name="course_price" />
+            <h2 style="color:white">Course sylabus in English(Word file only): </h2><input type="file" name="sylabus" id="sylabus"  style="    color: white;"/>
+            <h2 style="color:white">Course sylabus in Hebrew(Word file only): </h2><input type="file" name="sylabus_hebrew" id="sylabus_hebrew" style="    color: white;"/>
+            <h2 style="color:white">Course sylabus in Russian(Word file only): </h2><input type="file" name="sylabus_russian" id="sylabus_russian" style="    color: white;" />
+            <h2 style="color:white">Course image(prefered): </h2><input type="file" name="course_logo" id="course_logo" style="color: white;"/>
+            <button type="submit">submit</button>
+        }
+    </body>

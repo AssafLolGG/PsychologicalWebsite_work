@@ -59,7 +59,18 @@ namespace WebApplication2.Controllers
                 mail.Body = body;
 
                 System.Net.Mail.Attachment attachment;
-                attachment = new System.Net.Mail.Attachment(Server.MapPath( DatabaseAPI.getCourseByID(course_id_num).course_file));
+                if(Session["lang"] != null && ((string)Session["lang"] == "he"))
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file_hebrew));
+                }
+                else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file_russian));
+                }
+                else
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file));
+                }
                 mail.Attachments.Add(attachment);
 
                 smtpClient.Send(mail);
@@ -69,8 +80,18 @@ namespace WebApplication2.Controllers
                 mail.To.Add(ownerMail);
                 mail.Subject ="New interested in the course.";
                 mail.Body = "his email is: " + email_address + ".\nthe course he is interested in is: " + DatabaseAPI.getCourseByID(course_id_num).course_title + ".";
-
-                attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file));
+                if(Session["lang"] != null && ((string)Session["lang"] == "he"))
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file_hebrew));
+                }
+                else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file_russian));
+                }
+                else
+                {
+                    attachment = new System.Net.Mail.Attachment(Server.MapPath(DatabaseAPI.getCourseByID(course_id_num).course_file));
+                }
                 mail.Attachments.Add(attachment);
 
                 smtpClient.Send(mail);

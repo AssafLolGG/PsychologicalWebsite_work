@@ -22,10 +22,10 @@ namespace WebApplication2.Models
         public static List<Course> getAllCourses()
         {
             List<Course> courses = new List<Course>();
-            System.Data.DataSet courses_dataset = MvcApplication.DBconn.RunDataSetSQL("SELECT * FROM Courses");
+            System.Data.DataSet courses_dataset = MvcApplication.DBconn.RunDataSetSQL("SELECT * FROM Courses ORDER BY course_id DESC");
             for(int i = 0;i < courses_dataset.Tables[0].Rows.Count;i++)
             {
-                Course a = new Course() { course_id = int.Parse(courses_dataset.Tables[0].Rows[i]["course_id"].ToString()), course_cost= courses_dataset.Tables[0].Rows[i]["course_price"].ToString(), path_of_logo = courses_dataset.Tables[0].Rows[i]["Course_logo_file"].ToString(), course_file = courses_dataset.Tables[0].Rows[i]["course_sylabus_file"].ToString(), course_title = courses_dataset.Tables[0].Rows[i]["course_name"].ToString() };
+                Course a = new Course() { course_id = int.Parse(courses_dataset.Tables[0].Rows[i]["course_id"].ToString()),course_cost = courses_dataset.Tables[0].Rows[i]["course_price"].ToString(),path_of_logo = courses_dataset.Tables[0].Rows[i]["Course_logo_file"].ToString(),course_file = courses_dataset.Tables[0].Rows[i]["course_sylabus_file"].ToString(),course_title = courses_dataset.Tables[0].Rows[i]["course_name"].ToString(),course_file_hebrew = courses_dataset.Tables[0].Rows[i]["course_sylabus_file_hebrew"].ToString(),course_file_russian = courses_dataset.Tables[0].Rows[i]["course_sylabus_file_russian"].ToString(),course_title_hebrew = courses_dataset.Tables[0].Rows[i]["course_name_hebrew"].ToString(), course_title_russian = courses_dataset.Tables[0].Rows[i]["course_name_russian"].ToString() };
                 courses.Add(a);
             }
 

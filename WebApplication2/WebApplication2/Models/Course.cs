@@ -13,7 +13,9 @@ namespace WebApplication2.Models
         public string path_of_logo { get; set; }
         public string course_file { get; set; }
         public string course_title { get; set; }
-       
-        
+        public string course_title_hebrew { get; set; }
+        public string course_title_russian { get; set; }
+        public string course_file_hebrew { get; set; }
+        public string course_file_russian { get; set; }
     }
 }

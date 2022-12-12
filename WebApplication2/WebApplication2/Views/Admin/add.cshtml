@@ -8,9 +8,13 @@
                         FormMethod.Post,
                         new { enctype = "multipart/form-data" }))
         {
-            <h2 style="color:white">Title: </h2><input type="text" name="title" />
+            <h2 style="color:white">Title of the article in English: </h2><input type="text" name="title" />
+            <h2 style="color:white">Title of the article in Hebrew: </h2><input type="text" name="title_hebrew" />
+            <h2 style="color:white">Title of the article in Russian: </h2><input type="text" name="title_russian" />
             <h2 style="color:white">Subject of Article: </h2><input type="text" name="subject" />
-            <h2 style="color:white">Article(Word file only): </h2><input type="file" name="file" id="file" />
+            <h2 style="color:white">Article file in English(Word file only): </h2><input type="file" name="file" id="file" style="    color: white;" />
+            <h2 style="color:white">Article file in Hebrew(Word file only): </h2><input type="file" name="file_hebrew" id="file_hebrew" style="    color: white;" />
+            <h2 style="color:white">Article file in Russian(Word file only): </h2><input type="file" name="file_russian" id="file_russian" style="    color: white;" />
             <h2 style="color:white">Article image(prefered): </h2><input type="file" name="ArticleImage" id="articleImage" />
             <button type="submit">submit</button>
         }
