@@ -44,7 +44,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public ActionResult hit_arabic()
+        public ActionResult hit_russian()
         {
             Session["lang"] = "ar";
             return Redirect(System.Web.HttpContext.Current.Request.UrlReferrer.ToString());
