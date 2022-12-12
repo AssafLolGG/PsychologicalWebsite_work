@@ -171,7 +171,7 @@ namespace WebApplication2.Controllers
                     }
                 }
                 Article current_article = articlesList[index_of_article];
-                string article_picture_path = current_article.articleImage, article_body_english_path = current_article.body_english, article_body_hebrew_path = current_article.body_hebrew, article_body_arabic_path = current_article.body_arabic;
+                string article_picture_path = current_article.articleImage, article_body_english_path = current_article.body_english, article_body_hebrew_path = current_article.body_hebrew, article_body_arabic_path = current_article.body_russian;
 
                 if(subject == "")
                 {
@@ -180,7 +180,7 @@ namespace WebApplication2.Controllers
 
                 if(article_title_arabic == "")
                 {
-                    article_title_arabic = current_article.title_arabic;
+                    article_title_arabic = current_article.title_russian;
                 }
                 if(article_title_hebrew == "")
                 {

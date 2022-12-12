@@ -67,13 +67,14 @@
                 }
 
             .wrapper section a {
+
                 position:absolute;
                 color: #fff;
                 text-decoration: none;
                 font-size: 6em;
                 background: black;
                 width: 80px;
-                padding: 20px;
+                padding-top: 4%;
                 text-align: center;
                 z-index: 1;
                     
@@ -81,20 +82,20 @@
             }
 
                 .wrapper section a:nth-of-type(1) {
-                            top: -8%;
+                            top: -40%;
     /* bottom: 19%; */
     left: 0;
     background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, black 100%);
-    height: 192px;
+    height: 300px;
 
                 }
 
                 .wrapper section a:nth-of-type(2) {
-                          top: -8%;
+                          top: -40%;
     /*bottom: 28%;*/
     right: 0;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, black 100%);
-    height: 192px;
+    height: 300px;
                     }
 
 </style>
@@ -102,15 +103,27 @@
 
 @if(Session["lang"] != null && ((string)Session["lang"] == "he"))
 {
-    <u><h3 style="color:white;" class="text-center">המאמרים</h3></u>
+    <u><h3 style="    color: white;
+    top: 7%;
+    position: absolute;
+    left: 44%;
+    font-size: 43px;" class="text-center">המאמרים</h3></u>
 }
 else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
 {
-    <u><h3 style="color:white;" class="text-center">статьи</h3></u>
+    <u><h3 style="    color: white;
+    top: 7%;
+    position: absolute;
+    left: 44%;
+    font-size: 43px;" class="text-center">статьи</h3></u>
 }
 else
 {
-    <u><h3 style="color:white;" class="text-center">The articles</h3></u>
+    <u><h3 style="    color: white;
+    top: 7%;
+    position: absolute;
+    left: 44%;
+    font-size: 43px;" class="text-center">The articles</h3></u>
 }
     
 
@@ -132,7 +145,7 @@ else
                 
     <div class="item" onmouseover="onhoverd('item1@(i)')" onmouseout="out('item1@(i)')">
 
-        <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
+        <img width="341px" height="300px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
 
         <br />
         
@@ -143,7 +156,7 @@ else
             }
             else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
             {
-                @Model.articles.ToArray()[i].title_arabic
+                @Model.articles.ToArray()[i].title_russian
             }
             else
             {
@@ -171,7 +184,7 @@ else
         if(i < Model.articles.ToArray().Length)
         {
                     <div class="item" onmouseover="onhoverd('item2@(i)')" onmouseout="out('item2@(i)')">
-                        <img width="341px" height="192px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
+                        <img width="341px" height="300px" src="../@(Model.articles.ToArray()[i].articleImage)" alt="Describe Image" onclick="clicked_article(@(Model.articles.ToArray()[i].Id));">
                         <br />
                         <text id="item2@(i)" style="visibility:hidden;color:white; margin-left: 28%;">
                             @if(Session["lang"] != null && ((string)Session["lang"] == "he"))
@@ -180,7 +193,7 @@ else
                             }
                             else if(Session["lang"] != null && ((string)Session["lang"] == "ar"))
                             {
-                                @Model.articles.ToArray()[i].title_arabic
+                                @Model.articles.ToArray()[i].title_russian
                             }
                             else
                             {
@@ -195,7 +208,48 @@ else
         </section>
     }
 
+
 </div>
+    <div style="position: absolute;
+    width: 60px;
+    bottom: 12%;
+        right: 37%;
+">
+        <a href="@(Model.current_page + 1)" >
+            <img style="width:100%; height:100%;" src="~/Content/Forward.png" />
+        </a></div>
+
+    <div style="    position: absolute;
+    width: 60px;
+    bottom: 12%;
+    right: 12%;
+">
+        <a href="@(Model.last_page)" >
+            <img style="width:100%; height:100%;" src="~/Content/DoubleForward.png" />
+        </a>
+    </div>
+    <div style="    position: absolute;
+    width: 60px;
+    bottom: 12%;
+    left: 12%;
+    transform: rotate(180deg);
+">
+        <a href="1" >
+            <img style="width:100%; height:100%;" src="~/Content/DoubleForward.png" />
+        </a>
+    </div>
+
+    <div style="position: absolute;
+    width: 60px;
+    bottom: 12%;
+        left: 37%;
+        transform: rotate(180deg);
+">
+        <a href="@(Model.current_page - 1)">
+            <img style="width:100%; height:100%;" src="~/Content/Forward.png" />
+        </a>
+    </div>
+    
     }
 
 

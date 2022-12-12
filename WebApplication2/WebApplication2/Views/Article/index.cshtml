@@ -67,7 +67,7 @@ top: 90px;" title="Remove Article" />
         }
         @if((string)Session["lang"] == "ar")
         {
-            <h3 class="text-center" style="color:white;"><u> @Html.DisplayFor(modelItem => Model.article.title_arabic) </u></h3>
+            <h3 class="text-center" style="color:white;"><u> @Html.DisplayFor(modelItem => Model.article.title_russian) </u></h3>
 
         }
         <br />
@@ -83,9 +83,9 @@ top: 90px;" title="Remove Article" />
             {
                 @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_hebrew)))
             }
-            @if((string)Session["lang"] == "ar" && Model.article.body_arabic != "")
+            @if((string)Session["lang"] == "ar" && Model.article.body_russian != "")
             {
-                @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_arabic)))
+                @Html.Raw(File.ReadAllText(Server.MapPath(Model.article.body_russian)))
             }
         </div>
         <br />

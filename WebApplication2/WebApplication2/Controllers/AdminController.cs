@@ -9,7 +9,7 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-
+using Mammoth;
 namespace WebApplication2.Controllers
 {
     public class AdminController:Controller
@@ -155,22 +155,38 @@ namespace WebApplication2.Controllers
 
                         MvcApplication.DBconn.RunNonQuerySQL("UPDATE Articles SET body_english='" + path_english.Replace("'","''") + "',body_hebrew = '" + path_hebrew.Replace("'","''") + "', body_russian = '" + path_russian.Replace("'","''") + "', ArticleImage ='" + path_of_image.Replace("'","''") + "', ArticleSubject='" + subject.Replace("'","''") + "' where ArticleID = " + new_id);
 
-                        ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/Article" + new_id + ".docx"),Server.MapPath(path_english));
-                        ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/ArticleHebrew" + new_id + ".docx"),Server.MapPath(path_hebrew));
-                        ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/ArticleRussian" + new_id + ".docx"),Server.MapPath(path_russian));
+                        //ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/Article" + new_id + ".docx"),Server.MapPath(path_english));
+                        //ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/ArticleHebrew" + new_id + ".docx"),Server.MapPath(path_hebrew));
+                        //ConvertDocToHtml(Server.MapPath("~/ArticlesFiles/ArticleRussian" + new_id + ".docx"),Server.MapPath(path_russian));
 
-                        string s = System.IO.File.ReadAllText(Server.MapPath(path_english),System.Text.Encoding.GetEncoding("windows-1255"));
+                        //convert the docx to htmls
+                        var converter = new DocumentConverter();
+
+                        var result = converter.ConvertToHtml(Server.MapPath("~/ArticlesFiles/ArticleRussian" + new_id + ".docx"));
+                        System.IO.File.Create(Server.MapPath(path_russian)).Close();
+                        System.IO.File.WriteAllText(Server.MapPath(path_russian),result.Value);
+
+                        result = converter.ConvertToHtml(Server.MapPath("~/ArticlesFiles/ArticleHebrew" + new_id + ".docx"));
+                        System.IO.File.Create(Server.MapPath(path_hebrew)).Close();
+                        System.IO.File.WriteAllText(Server.MapPath(path_hebrew),result.Value);
+
+                        result = converter.ConvertToHtml(Server.MapPath("~/ArticlesFiles/Article" + new_id + ".docx"));
+                        System.IO.File.Create(Server.MapPath(path_english)).Close();
+                        System.IO.File.WriteAllText(Server.MapPath(path_english),result.Value);
+
+                        /*
+                        string s = System.IO.File.ReadAllText(Server.MapPath(path_english),System.Text.Encoding.GetEncoding("utf-8"));
                         s = s.Replace("\"" + new_id + ".files","\"" + "../ArticlesFiles/Article".Replace("\\","/") + new_id + ".files");
                         System.IO.File.WriteAllText(Server.MapPath(path_english),s);
 
-                        s = System.IO.File.ReadAllText(Server.MapPath(path_hebrew),System.Text.Encoding.GetEncoding("windows-1255"));
+                        s = System.IO.File.ReadAllText(Server.MapPath(path_hebrew),System.Text.Encoding.GetEncoding("utf-8"));
                         s = s.Replace("\"" + new_id + ".files","\"" + "../ArticlesFiles/ArticleHebrew".Replace("\\","/") + new_id + ".files");
                         System.IO.File.WriteAllText(Server.MapPath(path_hebrew),s);
 
-                        s = System.IO.File.ReadAllText(Server.MapPath(path_english),System.Text.Encoding.GetEncoding("windows-1255"));
+                        s = System.IO.File.ReadAllText(Server.MapPath(path_english),System.Text.Encoding.GetEncoding("utf-8"));
                         s = s.Replace("\"" + new_id + ".files","\"" + "../ArticlesFiles/ArticleRussian".Replace("\\","/") + new_id + ".files");
                         System.IO.File.WriteAllText(Server.MapPath(path_english),s);
-
+                        */
                         return RedirectToAction("index","articles");
                     }
 
